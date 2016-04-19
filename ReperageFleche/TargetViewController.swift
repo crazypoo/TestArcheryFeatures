@@ -34,8 +34,6 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     @IBOutlet var ArrowLabel: [UILabel]!
     
-    var id : Int = 0
-    
     @IBAction func setArrowPosition(sender: UIPanGestureRecognizer) {
         
         var arrow : Arrow
