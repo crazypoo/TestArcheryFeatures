@@ -10,14 +10,19 @@ import UIKit
 
 class CrossMarkerView: UIView {
     
-    var arrow : Arrow
+    var shot : Shot
     
-    init(arrow: Arrow){
-        self.arrow = arrow
-        
-        super.init(frame: CGRectMake(0, 0, 350, 350))
-        self.backgroundColor = UIColor.clearColor()
+    //scale depend de taille. frame.heigt => nouvelle taille, 350 taille de depart.
+    var scale : CGFloat
 
+    
+    init(shot: Shot, frame: CGRect){
+        self.shot = shot
+        self.scale = frame.size.height/Constants.firstTargetSize
+
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.clearColor()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,22 +31,25 @@ class CrossMarkerView: UIView {
     
     override func drawRect(rect: CGRect) {
         
-        if arrow.value == 7 || arrow.value == 8 {
+        UIColor.redColor().set()
+        
+        if shot.value == 7 || shot.value == 8 {
             UIColor.blackColor().set()
-        } else { UIColor.redColor().set() }
+        }
         
-        setCrossPath(arrow).stroke()
-        
+        setCrossPath().stroke()
     }
     
     struct  Constants {
         static let crossSize : CGFloat = 5
+        static let firstTargetSize : CGFloat = 350
     }
     
-    func setCrossPath(arrow : Arrow) -> UIBezierPath {
+    func setCrossPath() -> UIBezierPath {
         let crossSize = Constants.crossSize
-        let point = arrow.oldLocation
         let path = UIBezierPath()
+        
+        let point = CGPoint(x: shot.location.x * scale, y: shot.location.y * scale)
         
         path.moveToPoint(CGPoint(x: point.x - crossSize, y: point.y - crossSize))
         path.addLineToPoint(CGPoint(x: point.x, y: point.y))

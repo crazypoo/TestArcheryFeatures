@@ -13,55 +13,53 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     
     //MARK: -Arrow Gesture
-    var arrowTab = [Arrow](){
+    var nbrsEnd : Int! {
         didSet{
-            if TargetView != nil {
-                
-                if arrowTab.isEmpty {
-                    CorrectButton.enabled = false
-                } else { CorrectButton.enabled = true}
-                
-                if arrowTab.count == 6 {
-                    SendButton.enabled = true
-                } else { SendButton.enabled = false }
-                
-                updateUI()
+            print("numero de la volée : \(nbrsEnd)")
+        }
+    }
+    
+    var nbrsArrow : Int! {
+        didSet{
+            for i in 0...nbrsArrow-1 {
+                arrowTab.append(Arrow(id: i))
             }
         }
     }
+    
+    var arrowTab = [Arrow]() 
     
     var markers = [CrossMarkerView]()
 
     @IBOutlet var ArrowLabel: [UILabel]!
     
+    var arrowId : Int = 0
+    
     @IBAction func setArrowPosition(sender: UIPanGestureRecognizer) {
         
-        var arrow : Arrow
-        
-        if arrowTab.count < 6 {
+        if arrowId < nbrsArrow {
             let location = sender.locationInView(TargetView)
+            let currentArrow = arrowTab[arrowId]
             switch sender.state {
             case .Began:
-                arrow = Arrow(id: arrowTab.count, primaryLocation: location)
-                arrowTab.append(arrow)
+                currentArrow.shots.append(Shot(location: location))
             case .Changed:
-                arrowTab.last!.oldLocation = location
-                updateUI()
+                currentArrow.shots.last?.location = location
+            case .Ended:
+                arrowId += 1
             default:
                 break
             }
+            
+            updateUI()
         }
+
     }
     
     
     
     //MARK: -UI
-    @IBOutlet weak var TargetView: UIImageView! {
-        didSet{
-            TargetView.image = UIImage(named: "TargetImage")
-            TargetView.userInteractionEnabled = true
-        }
-    }
+    @IBOutlet weak var TargetView: UIImageView!
     
     @IBOutlet weak var CorrectButton: UIButton!{
         didSet {
@@ -80,9 +78,9 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
     func ButtonAction(sender: UIButton) {
         
         if sender.titleLabel?.text == "Correct" {
-            arrowTab.removeLast()
+            arrowTab[arrowId-1].shots.removeLast()
+            arrowId -= 1
             updateUI()
-            
         }
         
         if sender.titleLabel?.text == "Send" {
@@ -91,14 +89,34 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func updateUI() {
-        var j = 0
-        for i in ArrowLabel {
-            i.text = ""
-            if j < arrowTab.count {
-                i.text = String(arrowTab[j].value)
-                j += 1
+        
+        for i in 0...nbrsArrow-1 {
+            ArrowLabel[i].text = ""
+            let shots = arrowTab[i].shots
+            if shots.count == nbrsEnd+1 {
+                ArrowLabel[i].text = String(shots[nbrsEnd].value)
             }
         }
+        
+        var completedEnd : Bool = false
+        var isAnyArrowShot : Bool = false
+        for arrow in arrowTab {
+            if  arrow.shots.count != nbrsEnd + 1 {
+                completedEnd = false
+                break
+            }
+            completedEnd = true
+        }
+        for arrow in arrowTab {
+            if arrow.shots.count == nbrsEnd + 1 {
+                isAnyArrowShot = true
+                break
+            }
+        }
+        
+        if completedEnd { SendButton.enabled = true } else { SendButton.enabled = false }
+        if isAnyArrowShot { CorrectButton.enabled = true } else { CorrectButton.enabled = false }
+        
         
         updateMarkers()
     }
@@ -108,10 +126,28 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
             i.removeFromSuperview()
         }
         markers.removeAll()
-        for i in arrowTab {
-            markers.append(CrossMarkerView(arrow: i))
-            TargetView.addSubview(markers.last!)
+        
+        for arrow in arrowTab {
+            if arrow.shots.count == nbrsEnd+1 {
+                
+                let shot = arrow.shots[nbrsEnd]
+                
+                markers.append(CrossMarkerView(shot: shot, frame: TargetView.bounds))
+                
+                TargetView.addSubview(markers.last!)
+            }
         }
+        print("la")
+        print(markers.count)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        updateUI()
+        super.viewWillAppear(animated)
     }
     
     //MARK: -Segue
@@ -121,7 +157,7 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
                 switch identifier {
                 case "targetToResult":
                     dvc.arrowTab = self.arrowTab
-                    dvc.targetImage = image
+                    dvc.nbrsEnd = self.nbrsEnd
                 default:
                     break
                 }

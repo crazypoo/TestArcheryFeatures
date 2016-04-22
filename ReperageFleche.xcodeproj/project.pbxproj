@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A901B6CB1CCA337F001A4346 /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A901B6CA1CCA337F001A4346 /* Shot.swift */; };
+		A938822F1CC8C93A00834692 /* TargetImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938822E1CC8C93A00834692 /* TargetImageCell.swift */; };
 		A94CC9AB1CC4E29200273364 /* CrossMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94CC9AA1CC4E29200273364 /* CrossMarkerView.swift */; };
 		A94CDE6B1CC38521008A5930 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94CDE6A1CC38521008A5930 /* ResultViewController.swift */; };
+		A99204221CCA0FDC00C8CBF2 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99204211CCA0FDC00C8CBF2 /* HomePageViewController.swift */; };
 		A9A1C3B01CBBF9B900D9CF3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1C3AF1CBBF9B900D9CF3A /* AppDelegate.swift */; };
 		A9A1C3B21CBBF9B900D9CF3A /* TargetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1C3B11CBBF9B900D9CF3A /* TargetViewController.swift */; };
 		A9A1C3B51CBBF9B900D9CF3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9A1C3B31CBBF9B900D9CF3A /* Main.storyboard */; };
@@ -18,8 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A901B6CA1CCA337F001A4346 /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
+		A938822E1CC8C93A00834692 /* TargetImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetImageCell.swift; sourceTree = "<group>"; };
 		A94CC9AA1CC4E29200273364 /* CrossMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossMarkerView.swift; sourceTree = "<group>"; };
 		A94CDE6A1CC38521008A5930 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		A99204211CCA0FDC00C8CBF2 /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		A9A1C3AC1CBBF9B900D9CF3A /* ReperageFleche.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReperageFleche.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A1C3AF1CBBF9B900D9CF3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9A1C3B11CBBF9B900D9CF3A /* TargetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetViewController.swift; sourceTree = "<group>"; };
@@ -61,10 +67,13 @@
 			isa = PBXGroup;
 			children = (
 				A9A1C3AF1CBBF9B900D9CF3A /* AppDelegate.swift */,
+				A938822E1CC8C93A00834692 /* TargetImageCell.swift */,
 				A94CDE6A1CC38521008A5930 /* ResultViewController.swift */,
 				A9A1C3B11CBBF9B900D9CF3A /* TargetViewController.swift */,
+				A99204211CCA0FDC00C8CBF2 /* HomePageViewController.swift */,
 				A94CC9AA1CC4E29200273364 /* CrossMarkerView.swift */,
 				A9A1C3C11CBC030D00D9CF3A /* Arrow.swift */,
+				A901B6CA1CCA337F001A4346 /* Shot.swift */,
 				A9A1C3B31CBBF9B900D9CF3A /* Main.storyboard */,
 				A9A1C3B61CBBF9B900D9CF3A /* Assets.xcassets */,
 				A9A1C3B81CBBF9B900D9CF3A /* LaunchScreen.storyboard */,
@@ -145,9 +154,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A938822F1CC8C93A00834692 /* TargetImageCell.swift in Sources */,
+				A99204221CCA0FDC00C8CBF2 /* HomePageViewController.swift in Sources */,
 				A9A1C3B21CBBF9B900D9CF3A /* TargetViewController.swift in Sources */,
 				A94CDE6B1CC38521008A5930 /* ResultViewController.swift in Sources */,
 				A9A1C3B01CBBF9B900D9CF3A /* AppDelegate.swift in Sources */,
+				A901B6CB1CCA337F001A4346 /* Shot.swift in Sources */,
 				A94CC9AB1CC4E29200273364 /* CrossMarkerView.swift in Sources */,
 				A9A1C3C21CBC030D00D9CF3A /* Arrow.swift in Sources */,
 			);

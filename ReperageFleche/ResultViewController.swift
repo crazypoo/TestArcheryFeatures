@@ -8,33 +8,33 @@
 
 import UIKit
 
-class ResultViewController: UIViewController {
+class ResultViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var arrowTab : [Arrow]!{
-        didSet{
-            for i in arrowTab {
-                print(i.value)
-            }
-        }
+    var arrowTab : [Arrow]!
+    var nbrsEnd : Int!
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let targetCell = collectionView.dequeueReusableCellWithReuseIdentifier("targetCellIdentifier", forIndexPath: indexPath) as! TargetImageCell
+        targetCell.arrow = arrowTab[indexPath.item]
+        
+        return targetCell
     }
     
-    var targetImage : UIImage!
-    
-    @IBOutlet weak var imageView: UIImageView!{
-        didSet{
-            imageView.image = targetImage
-        }
-    }
-    
-    @IBAction func OkayButtonAction(sender: UIButton) {
-        performSegueWithIdentifier("resultToTarget", sender: self)
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return arrowTab.count
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if let dvc = segue.destinationViewController as? TargetViewController{
             if let identifier = segue.identifier{
                 switch identifier {
-                case "resultToTarget" : dvc.arrowTab = [Arrow]()
+                case "shootAgainSegue" :
+                    dvc.nbrsEnd = nbrsEnd + 1
+                    dvc.nbrsArrow = arrowTab.count
+                    dvc.arrowTab = arrowTab
+                case "resetArrrowSegue" : dvc.arrowTab = [Arrow]()
                 default : break
                 }
             }
