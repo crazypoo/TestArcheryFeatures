@@ -23,21 +23,20 @@ class TargetImageCell: UICollectionViewCell {
     
     @IBOutlet weak var arrowIDLAbel: UILabel!
 
-    var reperageViews : [CrossMarkerView]!
+    var reperageViews : [CrossMarkerView] = [CrossMarkerView]()
     
     
     func updateMarkers(shots : [Shot]){
+    
+        for i in reperageViews {
+            i.removeFromSuperview()
+        }
+        reperageViews.removeAll()
         
-        reperageViews = [CrossMarkerView]()
-        var j : Int = 1
         for currentShot in shots {
-            
-            print("location of marker : \(shots) for the arrow n° \(arrow.arrowId) and the end n° \(j)")
-            
             reperageViews.append(CrossMarkerView(shot: currentShot, frame: targetImageView.bounds))
             
             targetImageView.addSubview(reperageViews.last!)
-            j += 1
         }
         
     }

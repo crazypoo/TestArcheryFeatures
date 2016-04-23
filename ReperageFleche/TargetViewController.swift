@@ -137,8 +137,6 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
                 TargetView.addSubview(markers.last!)
             }
         }
-        print("la")
-        print(markers.count)
     }
     
     override func viewDidLoad() {

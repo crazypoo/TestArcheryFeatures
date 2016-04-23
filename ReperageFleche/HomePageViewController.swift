@@ -13,7 +13,7 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var stepper: UIStepper!{
         didSet{
             stepper.wraps = true
-            stepper.maximumValue = 15
+            stepper.maximumValue = 18
             stepper.minimumValue = 1
         }
     }
