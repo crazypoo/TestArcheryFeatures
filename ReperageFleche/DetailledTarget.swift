@@ -20,6 +20,7 @@ class DetailledTarget: UIViewController {
     
     @IBOutlet weak var endCountLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         updateUI()

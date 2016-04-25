@@ -13,11 +13,7 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     
     //MARK: -Arrow Gesture
-    var nbrsEnd : Int! {
-        didSet{
-            print("numero de la volée : \(nbrsEnd)")
-        }
-    }
+    var nbrsEnd : Int!
     
     var nbrsArrow : Int! {
         didSet{

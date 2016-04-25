@@ -36,9 +36,11 @@ class ResultViewController: UIViewController,UICollectionViewDelegate, UICollect
                     dvc.nbrsEnd = nbrsEnd + 1
                     dvc.nbrsArrow = arrowTab.count
                     dvc.arrowTab = arrowTab
+                    self.navigationController?.viewControllers.removeAll()
                 }
-            case "resetArrrowSegue" :
-                break
+            case "resetArrowSegue" :                     self.navigationController?.viewControllers.removeAll()
+
+            
             case "showDetailledTarget" :
                 if let dvc = segue.destinationViewController as? DetailledTarget {
                 
