@@ -12,6 +12,7 @@ class ResultViewController: UIViewController,UICollectionViewDelegate, UICollect
     
     var arrowTab : [Arrow]!
     var nbrsEnd : Int!
+    @IBOutlet weak var targetCollectionView: UICollectionView!
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
@@ -27,18 +28,30 @@ class ResultViewController: UIViewController,UICollectionViewDelegate, UICollect
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if let dvc = segue.destinationViewController as? TargetViewController{
-            if let identifier = segue.identifier{
-                switch identifier {
-                case "shootAgainSegue" :
+        if let identifier = segue.identifier{
+            
+            switch identifier {
+            case "shootAgainSegue" :
+                if let dvc = segue.destinationViewController as? TargetViewController{
                     dvc.nbrsEnd = nbrsEnd + 1
                     dvc.nbrsArrow = arrowTab.count
                     dvc.arrowTab = arrowTab
-                case "resetArrrowSegue" : dvc.arrowTab = [Arrow]()
-                default : break
                 }
+            case "resetArrrowSegue" :
+                break
+            case "showDetailledTarget" :
+                if let dvc = segue.destinationViewController as? DetailledTarget {
+                
+                    let selectedCell = sender as! TargetImageCell
+                    
+                    let indexPath = self.targetCollectionView.indexPathForCell(selectedCell)
+                        
+                    dvc.arrow = arrowTab[indexPath!.item]
+                }
+            default : break
             }
         }
+        
     }
     
 }

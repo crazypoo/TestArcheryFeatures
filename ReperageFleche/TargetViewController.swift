@@ -150,12 +150,13 @@ class TargetViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     //MARK: -Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dvc = segue.destinationViewController as? ResultViewController{
+        if let dvc = segue.destinationViewController as? UINavigationController{
             if let identifier = segue.identifier {
                 switch identifier {
                 case "targetToResult":
-                    dvc.arrowTab = self.arrowTab
-                    dvc.nbrsEnd = self.nbrsEnd
+                    let nvc = dvc.topViewController as! ResultViewController
+                    nvc.arrowTab = self.arrowTab
+                    nvc.nbrsEnd = self.nbrsEnd
                 default:
                     break
                 }
